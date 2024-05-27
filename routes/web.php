@@ -19,6 +19,7 @@ Route::post('/shop/update/{id}', [ShopController::class,'update'])->name('shop.u
 
 
 Route::get('/shop/{id}', [ShopController::class,'show'])->name('shop.detail');
+Route::delete('/shop/{id}', [ShopController::class,'destroy'])->name('shop.destroy');
 
 
 Route::get('/', function () {
