@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -21,7 +22,10 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        // pluckは必要なカラムのデータだけ取り出せるメソッド
+        // pluckは第二引数を取ることができ、pluck(valueにしたい値, keyにしたい値)という仕組みになっています
+        $categories = Category::all()->pluck('name', 'id');
+        return view('new', ['categories' => $categories]);
     }
 
     /**
@@ -29,15 +33,21 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $shop = new Shop;
+        $shop->name = request('name');
+        $shop->address = request('address');
+        $shop->category_id = request('category_id');
+        $shop->save();
+        return redirect()->route('shop.detail', ['id' => $shop->id]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Shop $shop)
+    public function show($id)
     {
-        //
+        $shop = Shop::find($id);
+        return view('show', ['shop' => $shop]);
     }
 
     /**
