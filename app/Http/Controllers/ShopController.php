@@ -31,6 +31,7 @@ class ShopController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // 保存機能
     public function store(Request $request)
     {
         $shop = new Shop;
