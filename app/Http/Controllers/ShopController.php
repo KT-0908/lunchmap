@@ -54,9 +54,11 @@ class ShopController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Shop $shop)
+    public function edit($id)
     {
-        //
+        $shop = Shop::find($id);
+        $categories = Category::all()->pluck('name', 'id');
+        return view('edit', ['shop' => $shop, 'categories' => $categories]);
     }
 
     /**
