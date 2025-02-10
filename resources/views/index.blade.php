@@ -6,8 +6,9 @@
 <table class='table table-striped table-hover'>
     <tr>
         <th>カテゴリ</th>
-        <th>記事名</th>
-        <th>内容</th>
+        <th>店名</th>
+        <th>住所</th>
+        <th>投稿者</th>
     </tr>
     @foreach ($shops as $shop)
         <tr>
@@ -16,11 +17,15 @@
                 </a>
             </td>
             <td>{{ $shop->address }}</td>
+            <td>{{ $shop->user->name }}</td>
         </tr>
     @endforeach
 </table>
 
+@auth
 <div>
-        <a href={{ route('shop.new') }} class='btn btn-outline-primary'>新しいお店</a>
-    <div>
+    <a href={{ route('shop.new') }} class='btn btn-outline-primary'>新しいお店</a>
+</div>
+@endauth
+
 @endsection
